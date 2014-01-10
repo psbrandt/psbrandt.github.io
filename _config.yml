@@ -1,0 +1,24 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Pascal Brandt
+tagline:          
+description:      'My writing and experiments.'
+url:              http://hyde.getpoole.com
+
+author:
+  name:           'Pascal Brandt'
+  url:            http://pascalbrandt.net/
+
+paginate:         5
+
+# Custom vars
+version:          1.0.0
+
+github:
+  repo:           https://github.com/poole/hyde
