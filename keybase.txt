@@ -1,0 +1,65 @@
+==================================================================
+https://keybase.io/psbrandt
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://psbrandt.io
+  * I am psbrandt (https://keybase.io/psbrandt) on keybase.
+  * I have a public key with fingerprint BCE2 6677 3BB3 5211 64DF  FDD9 63B8 212D 5EC7 5496
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "bce266773bb3521164dffdd963b8212d5ec75496",
+            "host": "keybase.io",
+            "key_id": "63b8212d5ec75496",
+            "uid": "ca1172ec575604ad6e7e93daa1245800",
+            "username": "psbrandt"
+        },
+        "service": {
+            "hostname": "psbrandt.io",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1401089783,
+    "expire_in": 157680000,
+    "prev": "c1316f29fce074aae035f7cd8c790e0244a70da2edd8c58de274e0341660f109",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v0.1.17
+Comment: https://keybase.io/crypto
+
+yMHhAnicbZFfSFRZHMdH06wBpyR8zxMEU6Oc++/cmdFYwWTZ2hSdaBSL6d57ztWb
+zr3XO3f80yTrmrk9iPWUwbBYSVJmadZDm0RiBqkPtcIWGJiuTzWwmyCIIuW5Vi/R
+0+F8f5/f9/v78ZvM3uZyp/XXR0bKq09cTZsZ/xh3hTr+W00A2cCtIJgA9WTrUTW9
+llimpek2CAJZISxCosjJMiewDIN4rKoYBxAn+1mGxQJRRIEPIOADdUbM6aA2shQj
+BZpBNfqJaJiqP+DjWwVFYhiRJYogCgjyEkZEJAEOSxLD8oIfQgeMEUuXooTSZky2
+JB3boM0HqNqkKVRNbEV/R3zJNy3DNhSjgRbqbNsMOn12q+mAzUSOfLWIyJqO6dq0
+oYlYMc3QQZChpGJrjifDQwb6A6Kf8wHSYmoWiWgOIYiIDgihE0OanF0YjkEqG1AV
+AkVekgjkBFVUsF8RA5BAluclEWKJJZhKgh8TVuQpwzMIQZWBAZofI426AYI8HVOq
+pZYxrVaX7LhFQNvE+MkMV5rbtT0z3Tmcy71z97dzRs5nfQ7NDvzrOjr2Mr1jjzfu
+uwOeXwr/fXbY0zhyyl2B6srDizemfve4F5TUVG/l2m8tK0V5ix863xczw2XNnob2
+gQNz6Rk9/9efkXLzHq+3j2F3Hz+xMd9XeOUpb/ZMRsoSa0ujFz6Z1a8LSkNopT98
+LHlu+n686Nnl1O2aN1mdOb7eBzWzqu16WxIc6ptP7vXue1T480Iyma9VFR/v7V5F
+cxXgyGrl2q71sCdz+UnGodOh9dS7v7TB/Jml2Z+E3F96Didm5GsvSnb0V7Uut1zP
+jr7qumc9jEZ/PfjH9ESOt50b+gfGB/PabnUxoxcxCnsXcu7exFppd+LP/RuphsFN
+TvoTSw==
+=kKr2
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/psbrandt
+
+==================================================================
