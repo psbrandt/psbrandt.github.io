@@ -151,6 +151,11 @@ $('.box').on('change', function() {
   applyFilter(map);
 });
 
+$('#info').addClass('animated bounceInRight');
+
+window.setTimeout(function() {
+  $('#info').addClass('animated fadeOutDown');
+}, 5000);
 
 
 
