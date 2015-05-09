@@ -130,7 +130,7 @@ function applyFilter(map) {
   if(filteredList.length > 0) {
     group = L.featureGroup(filteredList);
     group.addTo(map);
-    map.fitBounds(group.getBounds());
+    map.fitBounds(group.getBounds(), {maxZoom: 10});
   }
 }
 
