@@ -117,7 +117,7 @@ function applyFilter(map) {
     for (var key in checkedValues) {
       if (checkedValues.hasOwnProperty(key)) {
         if(checkedValues[key]) {
-          satisfiesFilter &= marker[key];
+          satisfiesFilter &= (marker[key] > 0);
         }
       }
     }
@@ -127,9 +127,11 @@ function applyFilter(map) {
     }
   }
 
-  group = L.featureGroup(filteredList);
-  group.addTo(map);
-  map.fitBounds(group.getBounds());
+  if(filteredList.length > 0) {
+    group = L.featureGroup(filteredList);
+    group.addTo(map);
+    map.fitBounds(group.getBounds());
+  }
 }
 
 // Initialise the map
