@@ -1,19 +1,19 @@
 # Dependencies
 markdown:         redcarpet
-pygments:         true
+highlighter:      pygments
 
 # Permalinks
 permalink:        pretty
 
 # Setup
 title:            Pascal Brandt
-tagline:          
+tagline:
 description:      'My writing and experiments.'
 url:              http://hyde.getpoole.com
 
 author:
-  name:           'Pascal Brandt'
-  url:            http://pascalbrandt.net/
+name:             'Pascal Brandt'
+url:              https://psbrandt.io/
 
 paginate:         5
 
@@ -21,4 +21,4 @@ paginate:         5
 version:          1.0.0
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo:           https://github.com/psbrandt/psbrandt.github.io

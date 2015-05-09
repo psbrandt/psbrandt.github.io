@@ -7,7 +7,9 @@ created: 1312124976
 
 **EDIT:** This is going to work until I fix up a DNS issue. Current I recommend using [MathJax](http://www.mathjax.org/) now in any case.
 
-If you plan to blog about anything scientific, especially in the mathematical sciences, there's a good chance you're going to need to render some equations. Since <img align="absmiddle" src="http://pascalbrandt.net/cgi-bin/mimetex.cgi?\LaTeX"/> is the de facto standard for typesetting mathematics, that's what you're going to want to use.
+If you plan to blog about anything scientific, especially in the mathematical sciences, there's a good chance you're going to need to render some equations. Since ![\LaTeX](http://old.pascalbrandt.net/cgi-bin/mimetex.cgi?\\LaTeX) is the de facto standard for typesetting mathematics, that's what you're going to want to use.
+
+this is just ![test](http://www.google.com.au/images/nav_logo7.png) a test of inline.
 
 If you're using Drupal, then a module like <a href="http://drupal.org/project/drutex">DruTeX</a> is the perfect solution. That is, if you're hosting the implementation yourself or have the rights to install <img align="absmiddle" src="http://pascalbrandt.net/cgi-bin/mimetex.cgi?\LaTeX"/> on the box running Drupal. If, however, this isn't the case, then you might want to consider <a href="http://www.biostatisticien.eu/mimetex.html">mimeTeX</a>. mimeTeX is a minimal rendering engine which takes <img align="absmiddle" src="http://pascalbrandt.net/cgi-bin/mimetex.cgi?\LaTeX"/> mathematics expressions as input and generates gifs as ouput. Since mimeTeX is accessible via <a href="http://en.wikipedia.org/wiki/Common_Gateway_Interface">CGI</a>, gifs can be generated on the fly each time your page is accessed.
 
