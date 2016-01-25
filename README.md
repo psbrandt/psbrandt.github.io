@@ -1,1 +1,1 @@
-My person website, currently at [http://pascalbrandt.net/](http://pascalbrandt.net/)
+My personal website, currently at [http://psbrandt.io](http://psbrandt.io)
