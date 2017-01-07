@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="https:///localhost/favicon.ico" />
+    <title>Healthy Weight SMART Application</title>
+    <script src="https://rawgit.com/smart-on-fhir/client-js/master/dist/fhir-client.min.js"></script>
+    <script>
+      FHIR.oauth2.authorize({
+        "client_id": "b2d12ec6-84d6-4133-92cd-81d0fd89c0f4",
+        "scope":  "patient/*.read",
+        "redirect_uri": "https://localhost:9000/"
+      });
+    </script>
+  </head>
+  Loading...
+</html>
