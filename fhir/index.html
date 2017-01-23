@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<!--
+	Tessellate by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>BIME 533: HL7 FHIR</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="assets/css/flatstack/main.css" />
+	<link rel="stylesheet" href="assets/css/prism.css" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	<link rel="shortcut icon" href="http://hl7.org/fhir/assets/ico/favicon.png">
+
+</head>
+
+<body>
+
+	<!-- Header -->
+	<section id="header" class="dark">
+		<header>
+			<h1>FHIR Tutorial</h1>
+			<p>This page presents a brief and gentle introduction to <a href="http://hl7.org/fhir/" target="_blank">HL7 FHIR</a>.</p>
+			<p>
+				No prior knowledge of interoperability standards, APIs or programming is necessary, which means that the initial sections <br/> may be too simple for some readers. Please feel free to skip ahead or jump directly to the <a href="https://www.hl7.org/fhir/overview.html"
+								target="_blank">FHIR overview</a><br/> if you're already familiar with all or some of the material.<br/><br/>Tutorial questions are marked with a <span class="icon fa-question"></span>
+			</p>
+		</header>
+		<footer>
+			<a href="#first" class="button scrolly">Begin</a>
+		</footer>
+	</section>
+
+	<!-- First -->
+	<section id="first" class="main">
+		<header>
+			<div class="container">
+				<h2>Interoperability Standards</h2>
+				<p>
+					A common problem faced by biomedical and health informatics researchers is that data needed to answer a particular research question are not always available in a single database. It is therefore often necessary to integrate data from multiple data sources.
+					To further complicate matters, these data may be stored using various different database schemas and may be encoded using one of a large number of vocabularies. Interoperability standards address these problems by defining a shared format that can be
+					used to transmit data from one health information system to another. These formats often allow for the use of multiple vocabularies and leave it up to the producer and consumer of the data to convert between them.
+				</p>
+			</div>
+		</header>
+		<div class="content dark style1 featured">
+			<div class="container">
+				<div class="row">
+					<div class="4u 12u(narrow)">
+						<section>
+							<span class="feature-icon"><span class="icon fa-question"></span></span>
+							<header>
+								<h3>Why</h3>
+							</header>
+							<p>
+								Interoprability standards exist to enable health information systems to share information with each other in an unambigious way to enable research and the practice of health care.
+							</p>
+						</section>
+					</div>
+					<div class="4u 12u(narrow)">
+						<section>
+							<span class="feature-icon"><span class="icon fa-users"></span></span>
+							<header>
+								<h3>How</h3>
+							</header>
+							<p>
+								Standards are usually developed over a long period of time by many interested parties. Various special interest groups convene many meetings and
+								organizations such as <a href="http://ihe.net/" target="_blank">IHE</a> help define and facilitate testing of higher level data workflows.
+							</p>
+						</section>
+					</div>
+					<div class="4u 12u(narrow)">
+						<section>
+							<span class="feature-icon"><span class="icon fa-cloud"></span></span>
+							<header>
+								<h3>Who</h3>
+							</header>
+							<p>Private companies, not-for-profits and consortia consisting of a large number of diverse stackholders are all involved in the standards development process.
+								In many cases, anyone can get involved if they have the interest and time.
+							</p>
+						</section>
+					</div>
+				</div>
+				<div class="row">
+					<div class="12u">
+						<footer>
+							<a href="#second" class="button scrolly">Continue</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Second -->
+	<section id="second" class="main">
+		<header>
+			<div class="container">
+				<h2>Application Programming Interfaces</h2>
+				<p>
+					Computer applications communicate with each other using application programming interfaces, more commonly referred to as APIs. Two important things
+					to know about APIs are that they are uniquely identified by a <a target="_blank" href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifier</a> (e.g. a URL on the Internet), and they communicate using messages that conform
+					to a specific format (the interoperability standard). <br/>
+					<br/>
+					Although APIs are inteded to be accessed by computers, you can ofter enter the URL into your browser to see the reponse that would be returned to the application. Try clicking this link to the Internet Chuck Norris Database API:
+					<a target="_blank" href="http://api.icndb.com/jokes/random"><code class="language-css">http://api.icndb.com/jokes/random</code></a>. You should see a random Chuck Norris joke in a machine readable format like:
+					<br/><br/><pre><code class="language-javascript">{
+	type: "success",
+	value: {
+		id: 328,
+		joke: "Most people fear the Reaper. Chuck Norris considers him 'a promising Rookie'.",
+		categories: [ ]
+	}
+}</code></pre><br/>
+				Most times we want to query an API with specific parameters. For example, fetching all Chuck Norris jokes in a specific category. The parameters can often be past directly in the URL. The following link replaces <code class="language-c">Chuck Norris</code> with <code class="language-c">Your Name</code>:
+				<br/><br/><a href="http://api.icndb.com/jokes/random?firstName=Your&lastName=Name"><pre><code class="language-css">http://api.icndb.com/jokes/random?firstName=Your&lastName=Name</code></pre></a><br/>
+				To add parameters, we first add a <code class="language-css">?</code> to the end of the URL, and then we add parameters using the convetion <code class="language-c">ParameterName=Value</code>. We separate
+				multiple parameters using an <code class="language-css">&</code>.
+				<br/><br/><br/><b><span class="icon fa-question"></span> Question 1: Generate a random Chuck Norris joke using your actual name. Provide the URL as well as the joke.</b>
+				</p>
+			</div>
+		</header>
+		<div class="content dark style2">
+			<div class="container">
+				<div class="row">
+					<div class="4u 12u(narrow)">
+						<section>
+							<h3>Augue vivamus sed ipsum commodo lorem dolor</h3>
+							<p>Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia eget ornare varius gravida. Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia
+								vivamus nisi eu eget ornare varius gravida euismod. Gravida dis lorem ipsum dolor placerat magna tempus feugiat.</p>
+							<p>Lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia vivamus nisi eu eget ornare varius gravida dolore euismod lorem ipsum dolor.</p>
+							<footer>
+								<a href="#third" class="button scrolly">Accumsan nisi tempor</a>
+							</footer>
+						</section>
+					</div>
+					<div class="8u 12u(narrow)">
+						<div class="row">
+							<div class="6u">
+								<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+							</div>
+							<div class="6u">
+								<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+							</div>
+							<div class="6u">
+								<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+							</div>
+							<div class="6u">
+								<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+							</div>
+							<div class="6u">
+								<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+							</div>
+							<div class="6u">
+								<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Third -->
+	<section id="third" class="main">
+		<header>
+			<div class="container">
+				<h2>Ornare varius lorem ipsum ante lectus</h2>
+				<p>Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet consequat<br /> feugiat. Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet.</p>
+			</div>
+		</header>
+		<div class="content dark style3">
+			<div class="container">
+				<span class="image featured"><img src="images/pic07.jpg" alt="" /></span>
+				<div class="row">
+					<div class="4u 12u(narrow)">
+						<h3>Diam vivamus turpis lorem sodales lectus ornare</h3>
+						<p>Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia eget ornare varius gravida. Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia
+							vivamus nisi eu eget ornare varius gravida euismod. Gravida dis lorem ipsum dolor placerat magna tempus feugiat.</p>
+						<p>Lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia vivamus nisi eu eget ornare varius gravida dolore euismod lorem ipsum dolor sit amet consequat. vivamus nisi eu eget ornare varius gravida dolore
+							euismod lorem ipsum dolor sit amet consequat. vivamus nisi eu eget ornare et magna.</p>
+					</div>
+					<div class="4u 12u(narrow)">
+						<p>Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia eget ornare varius gravida. Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia
+							vivamus nisi eu eget ornare varius gravida euismod. Gravida dis lorem ipsum dolor placerat magna tempus feugiat.</p>
+						<p>Lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia vivamus nisi eu eget ornare varius gravida dolore euismod lorem ipsum dolor sit amet consequat eget ornare varius gravida euismod. Gravida dis
+							lorem ipsum dolor placerat magna tempus feugiat magna tempus lorem.</p>
+						<p>Lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia.</p>
+					</div>
+					<div class="4u 12u(narrow)">
+						<p>Placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia eget ornare varius gravida. Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus augue cubilia vivamus nisi
+							eu eget ornare varius gravida euismod. Gravida dis lorem ipsum dolor placerat magna tempus feugiat. Lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia dolore.</p>
+						<p>Accumsan vivamus augue cubilia vivamus nisi eu eget ornare varius gravida dolore euismod lorem ipsum dolor sit amet conseismod lorem ipsum dolor sit amet consequat lorem ipsum consequat feugiat sed tempus euismod feugiat veroeros.</p>
+						<footer>
+							<a href="#fourth" class="button scrolly">Ipsum ornare lorem dolor</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Basic Elements -->
+<!--
+			<section class="main">
+				<header>
+					<div class="container">
+						<h2>A Whole Lotta Elements</h2>
+						<p>General purpose elements for every general purpose. Or something like that.</p>
+					</div>
+				</header>
+				<div class="content style1 dark">
+					<div class="container">
+						<section>
+							<header>
+								<h3>Paragraph</h3>
+								<p>This is a byline</p>
+							</header>
+							<p>Phasellus nisl nisl, varius id <sup>porttitor sed pellentesque</sup> ac orci. Pellentesque
+							habitant <strong>strong</strong> tristique <b>bold</b> et netus <i>italic</i> malesuada <em>emphasized</em> ac turpis egestas. Morbi
+							leo suscipit ut. Praesent <sub>id turpis vitae</sub> turpis pretium ultricies. Vestibulum sit
+							amet risus elit.</p>
+						</section>
+						<section>
+							<header>
+								<h3>Blockquote</h3>
+							</header>
+							<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget.
+							tempus euismod. Vestibulum ante ipsum primis in faucibus. Cras sit amet urna eros, id egestas
+							tempus ante ipsum primis in faucibus orci luctus et ultrices.</blockquote>
+						</section>
+						<section>
+							<header>
+								<h3>Divider</h3>
+							</header>
+							<p>Donec consectetur <a href="#">vestibulum dolor et pulvinar</a>. Etiam vel felis enim, at viverra
+							ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
+							facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
+							tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+							posuere cubilia.</p>
+							<hr />
+							<p>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra
+							ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
+							facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
+							tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+							posuere cubilia.</p>
+						</section>
+						<section>
+							<header>
+								<h3>Unordered List</h3>
+							</header>
+							<ul class="default">
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+							</ul>
+						</section>
+						<section>
+							<header>
+								<h3>Ordered List</h3>
+							</header>
+							<ol class="default">
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+								<li>Donec consectetur vestibulum dolor et vel felis enim at viverra ligula. Ut porttitor sagittis lorem.</li>
+							</ol>
+						</section>
+						<section>
+							<header>
+								<h3>Table</h3>
+							</header>
+							<div class="table-wrapper">
+								<table class="default">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Name</th>
+											<th>Description</th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>00001</td>
+											<td>Lorem ipsum dolor</td>
+											<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+											<td>29.99</td>
+										</tr>
+										<tr>
+											<td>00002</td>
+											<td>Sit amet nullam</td>
+											<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+											<td>19.99</td>
+										</tr>
+										<tr>
+											<td>00003</td>
+											<td>Feugiat felis viverra</td>
+											<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+											<td>29.99</td>
+										</tr>
+										<tr>
+											<td>00004</td>
+											<td>Sagittis enim felis</td>
+											<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+											<td>19.99</td>
+										</tr>
+										<tr>
+											<td>00005</td>
+											<td>Nullam sed vestibulum</td>
+											<td>Ut porttitor sagittis lorem quis nisi ornare.</td>
+											<td>19.99</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="3"></td>
+											<td>100.00</td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</section>
+						<section>
+							<header>
+								<h3>Form</h3>
+							</header>
+							<form method="post" action="#">
+								<div class="row 50%">
+									<div class="6u 12u(narrow)">
+										<input type="text" name="name" id="name" value="" placeholder="John Doe" />
+									</div>
+									<div class="6u 12u(narrow)">
+										<input type="text" name="email" id="email" value="" placeholder="johndoe@domain.tld" />
+									</div>
+								</div>
+								<div class="row 50%">
+									<div class="12u">
+										<div class="select" tabindex="-1">
+											<select name="department" id="department">
+												<option value="">Choose a department</option>
+												<option value="1">Manufacturing</option>
+												<option value="2">Administration</option>
+												<option value="3">Support</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row 50%">
+									<div class="12u">
+										<input type="text" name="subject" id="subject" value="" placeholder="Enter your subject" />
+									</div>
+								</div>
+								<div class="row 50%">
+									<div class="12u">
+										<textarea name="message" id="message" placeholder="Enter your message"></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<div class="12u">
+										<ul class="actions">
+											<li><input type="submit" class="button" value="Send Message" /></li>
+											<li><input type="reset" class="button alt" value="Clear Form" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</section>
+					</div>
+				</div>
+			</section>
+ -->
+
+	<!-- Fourth -->
+	<section id="fourth" class="main">
+		<header>
+			<div class="container">
+				<h2>About Me</h2>
+				<p>
+					I'm Pascal, I'm from Cape Town, South Africa and I'm a computer scientist and health information systems developer and open source software enthusiast. The biggest open source
+					project I'm involved with is <a href="http://openmrs.org" target="_blank">OpenMRS</a>.
+				</p>
+			</div>
+		</header>
+		<!-- <div class="content style4 featured">
+			<div class="container 75%">
+				<form method="post" action="#">
+					<div class="row 50%">
+						<div class="6u 12u(mobile)"><input type="text" placeholder="Name" /></div>
+						<div class="6u 12u(mobile)"><input type="text" placeholder="Email" /></div>
+					</div>
+					<div class="row 50%">
+						<div class="12u"><textarea name="message" placeholder="Message"></textarea></div>
+					</div>
+					<div class="row">
+						<div class="12u">
+							<ul class="actions">
+								<li><input type="submit" class="button" value="Send Message" /></li>
+								<li><input type="reset" class="button alt" value="Clear Form" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div> -->
+	</section>
+
+	<!-- Footer -->
+	<section id="footer">
+		<ul class="icons">
+			<li><a href="https://github.com/psbrandt" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+			<li><a href="https://twitter.com/psbrandt" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+			<li><a href="https://psbrandt.io" target="_blank" class="icon fa-globe"><span class="label">Home</span></a></li>
+
+		</ul>
+		<div class="copyright">
+			<ul class="menu">
+				<li>
+					<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/2.0/80x15.png" /></a>
+				</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+	</section>
+
+
+
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/prism.js"></script>
+</body>
+
+</html>
