@@ -167,23 +167,36 @@
 					The FHIR site contains a huge amount of detailed documentation about a wide range of topics. Browse the <a href="https://www.hl7.org/fhir/index.html" target="_blank">website</a> in order to answer the following questions.
 				</p>
 				<p>
-					<b><span class="icon fa-question"></span> Question 2: From the  <a href="https://www.hl7.org/fhir/index.html" target="_blank">homepage</a>, go to <i>General Documentation</i> and then <i>Community &amp; Credits</i>. List three organizations represented in the community along with a sentense (or more) describing what they do.</b>
+					<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 2: From the  <a href="https://www.hl7.org/fhir/index.html" target="_blank">homepage</a>, go to <i>General Documentation</i> and then <i>Community &amp; Credits</i>. List three organizations represented in the community along with a sentense (or more) describing the organization.</b>
 				</p>
 				<p>
-					<b><span class="icon fa-question"></span> Question 3: Select <i>Resources</i> from the top (purple) menu. Select any one resources and provide the link, a short description of what it is designed to model. Also list and describe one or two notable attributes listed in the <i>Resource Content</i> section.</b>
+					<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 3: Select <i>Resources</i> from the top (purple) menu. Select any one resources and provide the link and a short description of the real-life entity it is designed to model. Also list and describe one or two notable attributes listed in the <i>Resource Content</i> section.</b>
 				</p>
 			</div>
 		</header>
 		<div class="content dark style3">
 			<div class="container">
-				<span class="image featured"><img src="images/fire-2.png" alt="" /></span>
+				<!-- <span class="image featured"><img src="images/fire-2.png" alt="" /></span> -->
 				<div class="row">
 					<p>
 						For the following questions, we are going to interact with a FHIR API like we did with the Internet Chuck Norris Database API. The <code class="language-c">BaseURL</code> we're going to use is <code class="language-css">http://fhirtest.uhn.ca/baseDstu2/</code>. So, for example,
-						to get a list of all the patiets, we query the <code class="language-c">Patient</code> resource at the following link: <a target="_blank" href="http://fhirtest.uhn.ca/baseDstu2/Patient"><code class="language-css">http://fhirtest.uhn.ca/baseDstu2/Patient</code></a>
+						to get a list of all the patients, we query the <code class="language-c">Patient</code> resource at the following link: <a target="_blank" href="http://fhirtest.uhn.ca/baseDstu2/Patient"><code class="language-css">http://fhirtest.uhn.ca/baseDstu2/Patient</code></a>
 					</p>
 					<p>
-						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 4: What is the total number of patients returned at search link above?.</b>
+						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 4: What is the total number of patients returned at search link above? Hint: Look for the <code class="language-c">total</code> attribute near the top.</b>
+					</p>
+					<p>
+						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 5: Use the same URL, but this time include the <code class="language-c">name</code> parameter, and give it the value <code class="language-c">Todd</code>. Refer to the Chuck Norris example above if necessary. How many patients are returned for this filered search?</b>
+					</p>
+					<p>
+						Some APIs, including FHIR, allow you to access specific resources by including the resource identifier in the URL directly, without needing a <code class="language-css">?</code>. For example, to access the patient with ID <code class="language-c">2574</code>, we can go to: <a target="_blank" href="http://fhirtest.uhn.ca/baseDstu2/Patient/2574"><code class="language-css">http://fhirtest.uhn.ca/baseDstu2/Patient/2574</code></a>.
+					</p>
+					<p>
+						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 6: What is the name of the patient with ID <code class="language-c">2574</code>?</b>
+					</p>
+					<p>
+						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 7: Query the <a target="_blank" href="http://fhirtest.uhn.ca/baseDstu2/Observation"><code class="language-c">Observation</code></a> resource, and include the <code class="language-c">patient</code> parameter using the patient ID from the previous question as the value. You will need the <code class="language-c">2574</code> here.
+							How many observations are returned for this patient? List one of them with it's value, units and the vocabulary used to encode it.
 					</p>
 				</div>
 			</div>
