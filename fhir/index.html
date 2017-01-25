@@ -31,6 +31,9 @@
 				No prior knowledge of interoperability standards, APIs or programming is necessary, which means that the initial sections <br/> may be too simple for some readers. Please feel free to skip ahead or jump directly to the <a href="https://www.hl7.org/fhir/overview.html"
 								target="_blank">FHIR overview</a><br/> if you're already familiar with all or some of the material.<br/><br/>Tutorial questions are marked with a <span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span>
 			</p>
+			<p>
+				Additional resources available at the end. Please share yours too!
+			</p>
 		</header>
 		<footer>
 			<a href="#first" class="button scrolly">Begin</a>
@@ -195,11 +198,14 @@
 						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 6: What is the name of the patient with ID <code class="language-c">2574</code>? Is it unusual? If so, why do you think this is?</b>
 					</p>
 					<p>
+						For the final question, we are going to try to find all the observations for a particular patient. If you've never programmed before and find yourself struggling, submit what you have done so far and participate in the discussion to get help.
+					</p>
+					<p>
 						<b><span class="fa-stack fa-lg"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-question fa-stack-1x"></i></span> Question 7: Query the <a target="_blank" href="http://fhirtest.uhn.ca/baseDstu2/Observation"><code class="language-c">Observation</code></a> resource, and include the <code class="language-c">patient</code> parameter using the patient ID from the previous question as the value. You will need the <code class="language-css">?</code> here.
 							How many observations are returned for this patient? List one of them with its value, units and the vocabulary (coding system) used to encode it.</b>
 					</p>
           <p>
-            Note that case is usually important in computer programming, so a parameter called <code class="language-c">patient</code> is not the same as a parameter called <code class="language-c">Patient</code>.
+            <i class="fa fa-lightbulb-o"></i> Note that case is usually important in computer programming, so a parameter called <code class="language-c">patient</code> is not the same as a parameter called <code class="language-c">Patient</code>.
           </p>
 				</div>
 			</div>
@@ -382,35 +388,38 @@
 	<section id="fourth" class="main">
 		<header>
 			<div class="container">
-				<h2>About Me</h2>
-				<p>
-					I'm Pascal, I'm from Cape Town, South Africa and I'm a computer scientist and health information systems developer and open source software enthusiast. The biggest open source
-					project I'm involved with is <a href="http://openmrs.org" target="_blank">OpenMRS</a>.
-				</p>
+				<div class="container">
+					<h2>Resources</h2>
+					<p>
+						Our colleagues have found the following resources useful or interesting.</p><p>
+						<ul>
+							<li><a href="https://gallery.smarthealthit.org/" target="_blank">FHIR App Gallery</a></li>
+							<li><a href="http://projects.iq.harvard.edu/smartgenomics/home" target="_blank">Genomics FHIR standard</a></li>
+							<li><a href="https://thefhirplace.com/" target="_blank">A FHIR Blog</a></li>
+							<li><a href="https://www.simplifier.net/" target="_blank">Official FHIR Profile Development Tool</a></li>
+							<li><a href="http://schoolofdata.org/2013/11/18/web-apis-for-non-programmers/" target="_blank">Web APIs For Non-Programmers</a></li>
+							<li><a href="https://www.youtube.com/watch?v=s7wmiS2mSXY" target="_blank">What is an API</a> (video)</li>
+						</ul>
+					</p>
+				</div>
 			</div>
 		</header>
-		<!-- <div class="content style4 featured">
-			<div class="container 75%">
-				<form method="post" action="#">
-					<div class="row 50%">
-						<div class="6u 12u(mobile)"><input type="text" placeholder="Name" /></div>
-						<div class="6u 12u(mobile)"><input type="text" placeholder="Email" /></div>
-					</div>
-					<div class="row 50%">
-						<div class="12u"><textarea name="message" placeholder="Message"></textarea></div>
-					</div>
-					<div class="row">
-						<div class="12u">
-							<ul class="actions">
-								<li><input type="submit" class="button" value="Send Message" /></li>
-								<li><input type="reset" class="button alt" value="Clear Form" /></li>
-							</ul>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div> -->
 	</section>
+
+<section id="fifth" class="main">
+
+	<div class="content dark style3">
+
+		<div class="container">
+			<div style="font-size: 2.25em; text-align: center; font-weight: 100; margin-bottom: 60px;">About Me</div>
+			<p>
+				I'm Pascal, I'm from Cape Town, South Africa and I'm a computer scientist and health information systems developer and open source software enthusiast. The biggest open source
+				project I'm involved with is <a href="http://openmrs.org" target="_blank">OpenMRS</a>.
+			</p>
+		</div>
+	</div>
+
+</section>
 
 	<!-- Footer -->
 	<section id="footer">
