@@ -55,3 +55,7 @@ body > div > div.backgrounds > div.slide-background.present > video {
   font-size: 12px !important;
   color: gray;
 }
+
+.vocab {
+  font-size: 25px !important;
+}
