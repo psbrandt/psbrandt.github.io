@@ -1,0 +1,57 @@
+.fhir-talk {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.fhir-talk-title {
+  color: white;
+  text-shadow: 2px 2px #333333;
+}
+
+.fhir-talk-title h1 {
+  color: white;
+  /*background: -webkit-linear-gradient(#ffffff, #ff0000);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;*/
+text-shadow: 2px 2px #333333;
+}
+
+.fhir-talk-title h3 {
+  color: white;
+  text-shadow: 2px 2px #333333;
+}
+
+.fhir-talk-title h4 {
+  color: white;
+  text-shadow: 2px 2px #333333;
+}
+
+body > div > div.backgrounds > div.slide-background.present > video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  /*background: url(polina.jpg) no-repeat;*/
+  background-size: cover;
+  filter: blur(4px) grayscale(.5) opacity(0.8);
+}
+
+.ref {
+  font-size: 18px !important;
+}
+
+.footer-ref-container {
+  margin-top: 200px;
+}
+
+.footer-ref, .footer-ref > a, .footer-ref > a:hover {
+  font-size: 12px !important;
+  color: gray;
+}

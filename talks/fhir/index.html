@@ -1,50 +1,162 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>HL7 FHIR</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>HL7 FHIR</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css">
+	<link rel="stylesheet" href="css/fhir.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown data-background="img/title.png" class="fhir-talk fhir-talk-title">
+				# 🔥 HL7 FHIR 🔥
+				&
+
+				IHE Connectathon
+
+				### Pascal Brandt
+				@psbrandt
+
+				#### 31 January 2017
+			</section>
+			<section data-markdown>
+				## Outline
+				* Interoperability
+				* APIs
+				* HL7
+				* FHIR
+				* IHE Connectathon
+				* Discussion
+			</section>
+			<section>
+				<h1>Interoperability</h1>
+				<ul>
+					<li>Extent to which systems and devices can
+						<ul>
+							<li>Exchange data</li>
+							<li>Interpret that shared data</li>
+						</ul>
+					</li>
+					<li>Essential for</li>
+					<ul>
+						<li>Continuity of care</li>
+						<li>Monitoring &amp; Evaluation</li>
+						<li>Public Health Surveillance</li>
+					</ul>
+				</ul>
+				<div class="footer-ref-container">
+					<br/><br/>
+					<span class="footer-ref"><a href="http://www.himss.org/library/interoperability-standards/what-is-interoperability" target="_blank">http://www.himss.org/library/interoperability-standards/what-is-interoperability</a></span>
+				</div>
+			</section>
+			<section>
+				<h1>Interoperability</h1>
+				<h2>🗣 Vocabularies</h2>
+				<p class="fragment fade-up">
+				  <b>LOINC</b><br/>
+				  <b>66801-2:</b> How well can you tell a funny event to a group of children
+				</p>
+				<p class="fragment fade-up">
+				  <b>SNOMED CT</b><br/>
+				  <b>112630007:</b> Funny looking kid (FLK)
+				</p>
+				<p class="fragment fade-up">
+					<b>ICD-10</b><br/>
+					<b>V91.07:</b> Burn due to water-skis on fire
+				</p>
+			</section>
+			<section>
+				<h1>Interoperability</h1>
+				<img src="img/ph-grid.png" width="75%" border="0" /><br/>
+				<span class="footer-ref">Thacker SB, Qualters JR, Lee LM. Public health surveillance in the United States: evolution and challenges. <i>MMWR Suppl</i>. 2012;61(3):3-9.</span>
+			</section>
+			<section data-markdown>
+				# APIs
+
+			</section>
+			<section data-markdown>
+				# HL7
+			</section>
+			<section data-markdown>
+				# FHIR
+			</section>
+			<section data-markdown>
+				# FHIR
+			</section>
+			<section data-markdown>
+				# FHIR
+			</section>
+			<section data-markdown>
+				# SMART on FHIR
+			</section>
+			<section data-background-transition="none" data-background-video="img/connectathon.m4v" data-background-video-loop data-background-video-muted data-markdown class="fhir-talk-title">
+				# IHE Connectathon
+			</section>
+			<section>
+				# IHE Connection * Vendor compliance testing
+			</section>
+			<section>
+				<h2>IHE</h2>
+
+				<span style="font-size: 10px;">IHE is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information.</span>
+				<ul>
+					<li>
+						Integrating the Health Enterprise
+					</li>
+				</ul>
+			</section>
+			<section>Slide 7</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [{
+				src: 'plugin/markdown/marked.js'
+			}, {
+				src: 'plugin/markdown/markdown.js'
+			}, {
+				src: 'plugin/notes/notes.js',
+				async: true
+			}, {
+				src: 'plugin/highlight/highlight.js',
+				async: true,
+				callback: function() {
+					hljs.initHighlightingOnLoad();
+				}
+			}],
+
+			// Options
+			transition: 'convex'
+		});
+	</script>
+</body>
+
 </html>
