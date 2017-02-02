@@ -93,7 +93,7 @@
 						<td class="fragment fade-up">
 							<h4>🚕 Transport</h4>
 							<ul class="fragment fade-up">
-								<li>TCI/IP</li>
+								<li>TCP/IP</li>
 								<li>SOAP</li>
 								<li>REST</li>
 							</ul>
@@ -135,25 +135,173 @@
 			<section>
 				<h1>APIS</h1>
 				<img src="img/chuck.png" width="80%" style="border: 0px; box-shadow: none;"/>
+			</section>
+			<section data-markdown>
+				# HL7
+				**Overview**
+
+				* Health Level 7 (OSI model)
+				* Est. 1987
+				* ANSI/ISO 👍🏼
+				* Mission: To provide standards that empower global health data interoperability
 
 			</section>
 			<section data-markdown>
 				# HL7
+				**Standards**
+
+				* HL7 v2 &amp; v3
+				* CDA
+				* CCD
+				* Arden syntax
+				* FHIR
+
 			</section>
-			<section data-markdown>
-				# FHIR
+			<section>
+				<h1>HL7 v2</h1>
+				<h4>🔧🎩 Pipehat (1987)</h4>
+				<pre><code data-trim>
+					MSH|^~\&|MegaReg|XYZHospC|SuperOE|XYZImgCtr|20060529090131-0500||ADT^A01^ADT_A01|01052901|P|2.5
+					EVN||200605290901||||200605290900
+					PID|||56782445^^^UAReg^PI||KLEINSAMPLE^BARRY^Q^JR||19620910|M||2028-9^^HL70005^RA99113^^XYZ|260 GOODWIN CREST DRIVE^^BIRMINGHAM^AL^35209^^M~NICKELL’S PICKLES^10000 W 100TH AVE^BIRMINGHAM^AL^35200^^O|||||||0105I30001^^^99DEF^AN
+					PV1||I|W^389^1^UABH^^^^3||||12345^MORGAN^REX^J^^^MD^0010^UAMC^L||67890^GRAINGER^LUCY^X^^^MD^0010^UAMC^L|MED|||||A0||13579^POTTER^SHERMAN^T^^^MD^0010^UAMC^L|||||||||||||||||||||||||||200605290900
+					OBX|1|NM|^Body Height||1.80|m^Meter^ISO+|||||F
+					OBX|2|NM|^Body Weight||79|kg^Kilogram^ISO+|||||F
+					AL1|1||^ASPIRIN
+					DG1|1||786.50^CHEST PAIN, UNSPECIFIED^I9|||A
+		    </code></pre>
 			</section>
-			<section data-markdown>
-				# FHIR
+			<section>
+				<h1>HL7 v2</h1>
+				<h4>🔧🎩 Pipehat (1987)</h4>
+
+				<table width="100%">
+					<tr>
+						<td>
+							<b>PROs</b><br/>
+							<ul>
+								<li>Lightweight</li>
+								<li>Extensible</li>
+							</ul>
+						</td>
+						<td>
+							<b>CONs</b><br/>
+							<ul>
+								<li>Not human readable</li>
+								<li>Too simple</li>
+								<li>Extensible</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+
 			</section>
-			<section data-markdown>
-				# FHIR
+			<section>
+				<h1>HL7 v3</h1>
+				<h4>🌎 1995</h4>
+
+				<pre><code data-trim>
+					<POLB_IN224200 ITSVersion="XML_1.0" xmlns="urn:hl7-org:v3"
+					 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					  <id root="2.16.840.1.113883.19.1122.7" extension="CNTRL-3456"/>
+					  <creationTime value="200202150930-0400"/>
+					  <!-- The version of the datatypes/RIM/vocabulary used is that of May 2006 -->
+					  <versionCode code="2006-05"/>
+					  <!-- interaction id= Observation Event Complete, w/o Receiver Responsibilities -->
+					  <interactionId root="2.16.840.1.113883.1.6" extension="POLB_IN224200"/>
+					  <processingCode code="P"/>
+					  <processingModeCode nullFlavor="OTH"/>
+					  <acceptAckCode code="ER"/>
+					  <receiver typeCode="RCV">
+					    <device classCode="DEV" determinerCode="INSTANCE">
+					      <id extension="GHH LAB" root="2.16.840.1.113883.19.1122.1"/>
+					      <asLocatedEntity classCode="LOCE">
+					        <location classCode="PLC" determinerCode="INSTANCE">
+					          <id root="2.16.840.1.113883.19.1122.2" extension="ELAB-3"/>
+					        </location>
+					      </asLocatedEntity>
+					    </device>
+					  </receiver>
+					  <sender typeCode="SND">
+					    <device classCode="DEV" determinerCode="INSTANCE">
+					      <id root="2.16.840.1.113883.19.1122.1" extension="GHH OE"/>
+					      <asLocatedEntity classCode="LOCE">
+					        <location classCode="PLC" determinerCode="INSTANCE">
+					          <id root="2.16.840.1.113883.19.1122.2" extension="BLDG24"/>
+					        </location>
+					      </asLocatedEntity>
+					    </device>
+					  </sender>
+					  <!-- Trigger Event Control Act & Domain Content -->
+					</POLB_IN224200>
+		    </code></pre>
+
 			</section>
-			<section data-markdown>
-				# SMART on FHIR
+			<section>
+				<h1>HL7 v3</h1>
+				<h4>🌎 1995</h4>
+
+				<table width="100%">
+					<tr>
+						<td>
+							<b>PROs</b><br/>
+							<ul>
+								<li>Comprehensive</li>
+								<li>More human readable</li>
+							</ul>
+						</td>
+						<td>
+							<b>CONs</b><br/>
+							<ul>
+								<li>Slow</li>
+								<li>Complex</li>
+								<li>Not extensible</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+
+			</section>
+			<section  data-background-image="img/disaster-girl.jpg" class="fhir-talk fhir-talk-title">
+				<h1>🔥 FHIR 🔥</h1>
+			</section>
+			<section>
+				<h1>FHIR</h1>
+				<h5>🔥 2013 DSTU1</h5>
+				<ul>
+					<li>Fast</li>
+					<li>Healthcare</li>
+					<li>Interoperability</li>
+					<li>Resources</li>
+				</ul>
+			</section>
+			<section>
+				<h1>FHIR</h1>
+				<h5>🔥 Fast</h5>
+				<ul>
+					<li>Modern technologies</li>
+					<li>Common scenarios</li>
+					<li>Human readable</li>
+					<li>Resources</li>
+				</ul>
+			</section>
+			<section>
+				<h1>FHIR</h1>
+				<h5>🔥 Fast</h5>
+				<ul>
+					<li>Modern technologies</li>
+					<li>Lightweight</li>
+					<li>Common scenarios</li>
+					<li>Human readable</li>
+					<li>Resources</li>
+				</ul>
 			</section>
 			<section data-background-transition="none" data-background-video="img/connectathon.m4v" data-background-video-loop data-background-video-muted data-markdown class="fhir-talk-title">
 				# IHE Connectathon
+			</section>
+			<section data-background-image="img/gazelle-dashboard.png" data-background-size="contain">
+			</section>
+			<section data-background-image="img/gazelle-xds.png" data-background-size="contain">
 			</section>
 			<section>
 				<h3>HIMSS Use Case</h3>
@@ -175,11 +323,14 @@
 			<section>
 				<h1>Resources</h1>
 				<a target="_blank" href="https://medium.freecodecamp.com/what-is-an-api-in-english-please-b880a3214a82#.tc9ud0sw1">What is an API?</a>
+				<a target="_blank" href="http://www.slideshare.net/GrahameGrieve/introduction-to-fhir">Introduction to FHIR</a>
 			</section>
-			<section>
-				<h1>Thanks!</h1>
-				psbrandt@uw.edu
-				psb.rs/fhir-talk
+			<section data-background-image="img/questions.jpg">
+				<div style="float: right;">
+				<div style="font-size: 128px;">Thanks!</div>
+				<br/>psbrandt@uw.edu<br/><br/>
+				<a href="psb.re/fhir-talk">psb.re/fhir-talk</a>
+				</div<
 			</section>
 		</div>
 	</div>
