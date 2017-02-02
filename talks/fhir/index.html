@@ -255,7 +255,7 @@
 							<ul>
 								<li>Slow</li>
 								<li>Complex</li>
-								<li>Not extensible</li>
+								<li>Less extensible</li>
 							</ul>
 						</td>
 					</tr>
@@ -277,25 +277,103 @@
 			</section>
 			<section>
 				<h1>FHIR</h1>
-				<h5>🔥 Fast</h5>
+				<h5>🔥 Advantages</h5>
 				<ul>
 					<li>Modern technologies</li>
 					<li>Common scenarios</li>
 					<li>Human readable</li>
-					<li>Resources</li>
+					<li>Lightweight</li>
+					<li>Low 💰</li>
 				</ul>
 			</section>
 			<section>
 				<h1>FHIR</h1>
-				<h5>🔥 Fast</h5>
+				<h5>🔥 2013 DSTU1</h5>
+				<pre><code data-trim>
+{
+  "resourceType": "Patient",
+  "id": "9633",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t<p>\n\t\t\t\t<b>Generated Narrative with Details</b>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<b>identifier</b>: HOSP-CD14D9 (USUAL)</p>\n\t\t\t<p>\n\t\t\t\t<b>name</b>: Todd G. Lerr (OFFICIAL)</p>\n\t\t\t<p>\n\t\t\t\t<b>gender</b>: male</p>\n\t\t\t<p>\n\t\t\t\t<b>birthDate</b>: Jun 7, 2012</p>\n\t\t\t<p>\n\t\t\t\t<b>deceased</b>: false</p>\n\t\t\t<p>\n\t\t\t\t<b>address</b>: 123 North 102nd Street Apt 4d Harrisburg PA 17102 USA (HOME)</p>\n\t\t</div>"
+  },
+  "identifier": [
+    {
+      "use": "usual",
+      "system": "http://happyvalley.com/patient",
+      "value": "HOSP-CD14D9"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2012-06-07",
+  "deceasedBoolean": false,
+  "address": [
+    {
+      "use": "home",
+      "line": [
+        "123 North 102nd Street",
+        "Apt 4d"
+      ],
+      "city": "Harrisburg",
+      "state": "PA",
+      "postalCode": "17102",
+      "country": "USA"
+    }
+  ]
+}
+		    </code></pre>
+			</section>
+			<section>
+				<h1>FHIR</h1>
+				<h5>🔥 Paradigms</h5>
 				<ul>
-					<li>Modern technologies</li>
-					<li>Lightweight</li>
-					<li>Common scenarios</li>
-					<li>Human readable</li>
-					<li>Resources</li>
+					<li>Documents</li>
+					<li>Messages</li>
+					<li>Services (REST)</li>
 				</ul>
 			</section>
+			<section>
+				<h1>FHIR</h1>
+				<h5>🔥 Resources</h5>
+				<ul>
+					<li>Logical Units (e.g. Patient)</li>
+					<li>Indentifiable</li>
+					<li>Relevant</li>
+          <li>Sections
+            <ul>
+    					<li>Human readable summary</li>
+              <li>Data</li>
+              <li>Extensions</li>
+              <li>Links</li>
+            </ul>
+          </li>
+				</ul>
+			</section>
+      <section data-background-image="img/resources.png" data-background-size="contain">
+      </section>
+      <section>
+        <h1>FHIR</h1>
+        <h5>🔥 Resources</h5>
+
+        <ul>
+          <li>Coded Concepts</li>
+          <li>Vocabularies (LOINC, SNOMED, etc)</li>
+          <li>Bundles</li>
+        </ul>
+      </section>
+      <section>
+        <h1>FHIR</h1>
+        <h5>🔥 Operations</h5>
+
+        <ul>
+          <li>Create</li>
+          <li>Read</li>
+          <li>Update</li>
+          <li>Delete</li>
+        </ul>
+      </section>
+      <section data-background-image="img/extentions.png" data-background-size="contain">
+      </section>
 			<section data-background-transition="none" data-background-video="img/connectathon.m4v" data-background-video-loop data-background-video-muted data-markdown class="fhir-talk-title">
 				# IHE Connectathon
 			</section>
@@ -308,21 +386,8 @@
 				<img src="img/himss.png" width="80%" style="border: 0px; box-shadow: none;"/>
 			</section>
 			<section>
-				# IHE Connection * Vendor compliance testing
-			</section>
-			<section>
-				<h2>IHE</h2>
-
-				<span style="font-size: 10px;">IHE is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information.</span>
-				<ul>
-					<li>
-						Integrating the Health Enterprise
-					</li>
-				</ul>
-			</section>
-			<section>
 				<h1>Resources</h1>
-				<a target="_blank" href="https://medium.freecodecamp.com/what-is-an-api-in-english-please-b880a3214a82#.tc9ud0sw1">What is an API?</a>
+				<a target="_blank" href="https://medium.freecodecamp.com/what-is-an-api-in-english-please-b880a3214a82#.tc9ud0sw1">What is an API?</a><br/>
 				<a target="_blank" href="http://www.slideshare.net/GrahameGrieve/introduction-to-fhir">Introduction to FHIR</a>
 			</section>
 			<section data-background-image="img/questions.jpg">
