@@ -19,6 +19,8 @@ url:              https://psbrandt.io/
 
 paginate:         5
 
+exclude:          'talks/*.md'
+
 # Custom vars
 version:          1.0.0
 
