@@ -29,7 +29,7 @@ const opts = {
     plotBands: [
       {
         color: "rgba(192, 192, 192, 0.2)",
-        from: moment("2018-07-8").valueOf(),
+        from: moment("2018-07-08").valueOf(),
         to: moment("2018-07-24").valueOf(),
         label: {
           text: "Mom's<br/>Birthday<br/>US Trip",
@@ -110,9 +110,9 @@ const formatDuration = seconds =>
     .format("y [years], M [months], d [days], h [hrs], m [min], s [sec]");
 
 const prepData = async () => {
-  const days = await d3.json("/data/days.json");
+  const days = await d3.json("../2018/data/days.json");
 
-  const raw = await d3.json("/data/work/productivity.json");
+  const raw = await d3.json("../2018/data/work/productivity.json");
 
   const groups = [
     {

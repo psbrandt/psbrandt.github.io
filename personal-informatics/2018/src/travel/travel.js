@@ -3,7 +3,7 @@ const splitAt = (x, index) => {
 };
 
 export const flights = async () => {
-  const flights = await d3.json("/data/travel/flights.json");
+  const flights = await d3.json("../2018/data/travel/flights.json");
 
   let distance = 0;
   const time = moment.duration();
