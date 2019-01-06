@@ -1,0 +1,170 @@
+html,
+body {
+  padding: 5px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* h3 {
+  font-variant: small-caps;
+}
+
+*/
+
+.metrics-outer {
+  display: block;
+  height: 80px;
+}
+
+.metrics-wrapper {
+  display: inline-block;
+  float: right;
+  padding-right: 5px;
+}
+
+.metric {
+  color: rgb(114, 114, 114);
+  display: inline-block;
+  clear: both;
+  height: 80px;
+  vertical-align: top;
+  white-space: nowrap;
+  -webkit-perspective-origin: 138px 58px;
+  perspective-origin: 138px 58px;
+  -webkit-transform-origin: 138px 58px;
+  -ms-transform-origin: 138px 58px;
+  transform-origin: 138px 58px;
+  border: 0px none rgb(114, 114, 114);
+  font: normal normal normal normal 13px / 19.5px "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  margin: 0px 0px 34px 0px;
+  outline: rgb(114, 114, 114) none 0px;
+  padding: 0px 0px 36px 0px;
+}
+
+.metric-right {
+  color: rgb(114, 114, 114);
+  display: block;
+  height: 80px;
+  vertical-align: top;
+  white-space: nowrap;
+  -webkit-perspective-origin: 138px 58px;
+  perspective-origin: 138px 58px;
+  -webkit-transform-origin: 138px 58px;
+  -ms-transform-origin: 138px 58px;
+  transform-origin: 138px 58px;
+  border: 0px none rgb(114, 114, 114);
+  font: normal normal normal normal 13px / 19.5px "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  margin: 0px 0px 34px 0px;
+  outline: rgb(114, 114, 114) none 0px;
+  padding: 0px 0px 36px 0px;
+}
+
+.metric-title {
+  text-align: right;
+  color: rgb(153, 153, 153);
+  font-stretch: condensed;
+  height: 16px;
+  line-height: 16px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-perspective-origin: 128px 8px;
+  perspective-origin: 128px 8px;
+  -webkit-transform-origin: 128px 8px;
+  -ms-transform-origin: 128px 8px;
+  transform-origin: 128px 8px;
+  border: 0px none rgb(153, 153, 153);
+  font: normal normal bold condensed 15px / 16.5px HelveticaNeue-CondensedBold,
+    "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
+  margin: 0px 0px 6px;
+  outline: rgb(153, 153, 153) none 0px;
+}
+
+.metric-title {
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  border-bottom-color: rgb(153, 153, 153);
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(153, 153, 153);
+  border-left-style: none;
+  border-left-width: 0px;
+  border-right-color: rgb(153, 153, 153);
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(153, 153, 153);
+  border-top-style: none;
+  border-top-width: 0px;
+  color: rgb(153, 153, 153);
+  display: block;
+  font-family: HelveticaNeue-CondensedBold, "Helvetica Neue", "Arial Narrow",
+    Arial, sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  height: 16px;
+  line-height: 16px;
+  margin-bottom: 6px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-transform: uppercase;
+  vertical-align: baseline;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.metric-value {
+  float: right;
+  -webkit-font-smoothing: antialiased;
+  border-bottom-color: rgb(51, 51, 51);
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(51, 51, 51);
+  border-left-style: none;
+  border-left-width: 0px;
+  border-right-color: rgb(51, 51, 51);
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(51, 51, 51);
+  border-top-style: none;
+  border-top-width: 0px;
+  color: rgb(51, 51, 51);
+  display: inline;
+  font-family: HelveticaNeue-CondensedBold, "Helvetica Neue", "Arial Narrow",
+    Arial, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  height: auto;
+  line-height: 36px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  vertical-align: baseline;
+  white-space: nowrap;
+  width: auto;
+}
