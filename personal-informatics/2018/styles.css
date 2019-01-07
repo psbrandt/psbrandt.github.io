@@ -6,12 +6,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* h3 {
-  font-variant: small-caps;
-}
-
-*/
-
 .metrics-outer {
   display: block;
   height: 80px;
@@ -37,7 +31,7 @@ body {
   transform-origin: 138px 58px;
   border: 0px none rgb(114, 114, 114);
   font: normal normal normal normal 13px / 19.5px "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  Arial, sans-serif;
   margin: 0px 0px 34px 0px;
   outline: rgb(114, 114, 114) none 0px;
   padding: 0px 0px 36px 0px;
@@ -56,7 +50,7 @@ body {
   transform-origin: 138px 58px;
   border: 0px none rgb(114, 114, 114);
   font: normal normal normal normal 13px / 19.5px "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
+  Arial, sans-serif;
   margin: 0px 0px 34px 0px;
   outline: rgb(114, 114, 114) none 0px;
   padding: 0px 0px 36px 0px;
@@ -77,7 +71,7 @@ body {
   transform-origin: 128px 8px;
   border: 0px none rgb(153, 153, 153);
   font: normal normal bold condensed 15px / 16.5px HelveticaNeue-CondensedBold,
-    "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
+  "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
   margin: 0px 0px 6px;
   outline: rgb(153, 153, 153) none 0px;
 }
@@ -105,7 +99,7 @@ body {
   color: rgb(153, 153, 153);
   display: block;
   font-family: HelveticaNeue-CondensedBold, "Helvetica Neue", "Arial Narrow",
-    Arial, sans-serif;
+  Arial, sans-serif;
   font-size: 15px;
   font-style: normal;
   font-variant: normal;
@@ -149,7 +143,7 @@ body {
   color: rgb(51, 51, 51);
   display: inline;
   font-family: HelveticaNeue-CondensedBold, "Helvetica Neue", "Arial Narrow",
-    Arial, sans-serif;
+  Arial, sans-serif;
   font-size: 52px;
   font-style: normal;
   font-variant: normal;
@@ -167,4 +161,10 @@ body {
   vertical-align: baseline;
   white-space: nowrap;
   width: auto;
+}
+
+#flight-map {
+  /* border: 1px solid red; */
+  margin: 20px;
+  height: 800px;
 }
