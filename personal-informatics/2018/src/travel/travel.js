@@ -6,12 +6,13 @@ const canvas = d3.select("#globe");
 let countries;
 let flightData;
 let path, projection;
-let rotation = 40;
+let rotation = 30;
 let datetime = moment("2018-01-01 00:00:00+02:00");
 let time = 0;
 let flightPaths = turf.featureCollection([]);
 let currentFlight;
-let currentLocation = [18.596489, -33.968906];
+let currentLocation = [-18.596489, 33.968906];
+let zoom = 2.2;
 
 const v = () => {
   const dims = document.getElementById("globe").getBoundingClientRect();
@@ -37,6 +38,7 @@ const scale = () => {
 const drawOcean = () => {
   const vars = v();
 
+  vars.context.strokeStyle = "darkgrey";
   vars.context.lineWidth = 1.5;
   vars.context.fillStyle = "aliceblue";
 
@@ -46,7 +48,7 @@ const drawOcean = () => {
   vars.context.arc(
     vars.width / 2,
     vars.height / 2,
-    vars.radius,
+    vars.radius * zoom,
     0,
     2 * Math.PI
   );
@@ -59,18 +61,19 @@ const drawCountries = () => {
 
   projection = d3
     .geoOrthographic()
-    .scale(vars.radius)
+    .scale(vars.radius * zoom)
     .translate([vars.width / 2, vars.height / 2]);
 
   // console.log(rotation);
 
-  projection.rotate([rotation, 0]);
+  projection.rotate(currentLocation);
   // projection.center(currentLocation);
 
   path = d3.geoPath(projection, vars.context);
 
   // console.log(path);
 
+  vars.context.strokeStyle = "darkgrey";
   vars.context.lineWidth = 0.35;
   vars.context.fillStyle = "mintcream";
 
@@ -85,19 +88,19 @@ const drawCountries = () => {
 const drawAirports = () => {
   const vars = v();
 
-  const color = d3.color("red");
+  const color = d3.color("steelblue");
   color.opacity = 0.25;
   vars.context.fillStyle = color;
 
   path.pointRadius(10);
 
-  const pt = [-33.968906, 18.596489];
-  const pt2 = [18.596489, -33.968906];
+  // const pt = [-33.968906, 18.596489];
+  // const pt2 = [18.596489, -33.968906];
 
-  const pt3 = {
-    type: "Point",
-    coordinates: pt2
-  };
+  // const pt3 = {
+  //   type: "Point",
+  //   coordinates: pt2
+  // };
 
   // console.log("ASD", projection(pt));
 
@@ -107,6 +110,10 @@ const drawAirports = () => {
     path({
       type: "Point",
       coordinates: [f.start_airport_longitude, f.start_airport_latitude]
+    });
+    path({
+      type: "Point",
+      coordinates: [f.end_airport_longitude, f.end_airport_latitude]
     });
   });
 
@@ -132,7 +139,8 @@ const drawTrips = () => {
     coordinates: [[18.596489, -33.968906], [4.763385, 52.309069]]
   };
 
-  vars.context.lineWidth = 1.5;
+  vars.context.strokeStyle = "steelblue";
+  vars.context.lineWidth = 0.7;
 
   vars.context.beginPath();
 
@@ -170,6 +178,27 @@ const drawDateTime = () => {
   );
 };
 
+const drawCurrentPosition = () => {
+  const vars = v();
+
+  const color = d3.color("red");
+  color.opacity = 0.25;
+  vars.context.fillStyle = color;
+
+  path.pointRadius(10);
+
+  vars.context.beginPath();
+
+  // console.log(currentLocation);
+
+  path({
+    type: "Point",
+    coordinates: [-currentLocation[0], -currentLocation[1]]
+  });
+
+  vars.context.fill();
+};
+
 const render = () => {
   const vars = v();
   vars.context.clearRect(0, 0, vars.width, vars.height);
@@ -178,12 +207,13 @@ const render = () => {
   drawAirports();
   drawTrips();
   drawDateTime();
+  drawCurrentPosition();
 };
 
 const updateTime = () => {
   // Update time more quickly when not flying
   if (currentFlight) {
-    datetime.add(10, "m");
+    datetime.add(5, "m");
   } else {
     time = time + 1;
     datetime.add(2, "h");
@@ -258,10 +288,25 @@ const getCompletedSegment = flight => {
   // get endpoint of currently completed
   const completedFraction = getFlightCompletedFraction(flight);
 
+  // // just snap to the end
+  // if (completedFraction > 0.97) {
+  //   return flightLine;
+  // }
+
   const distance = getFlightDistance(flight);
   const endpoint = turf.along(flightLine, distance * completedFraction, {
     unit: "kilometers"
   });
+
+  currentLocation = [
+    // endpoint.geometry.coordinates[1],
+
+    -endpoint.geometry.coordinates[0],
+    -endpoint.geometry.coordinates[1],
+    0
+  ];
+
+  // console.log(currentLocation);
 
   // create line from start to point
   return turf.helpers.lineString(
