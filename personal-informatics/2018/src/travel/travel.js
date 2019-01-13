@@ -1,7 +1,6 @@
-const splitAt = (x, index) => {
-  return { value: x.slice(0, index), unit: x.slice(index) };
-};
-
+/**
+ * Various global variables (FIXME: don't do this)
+ */
 const canvas = d3.select("#globe");
 let countries;
 let flightData;
@@ -10,10 +9,17 @@ let rotation = 30;
 let datetime = moment("2018-01-01 00:00:00+02:00");
 let time = 0;
 let flightPaths = turf.featureCollection([]);
-let currentFlight;
+let currentFlight,
+  flightsCompleted = 0,
+  distanceCompleted = 0,
+  durationCompleted = 0;
 let currentLocation = [-18.596489, 33.968906];
 let zoom = 2.2;
+let animateFlights = true;
 
+/**
+ * Convenient access to various canvas attributes
+ */
 const v = () => {
   const dims = document.getElementById("globe").getBoundingClientRect();
 
@@ -28,6 +34,9 @@ const v = () => {
   };
 };
 
+/**
+ * Fit the canvas onto the screen
+ */
 const scale = () => {
   const width = document.getElementById("flight-map").clientWidth;
   const height = document.getElementById("flight-map").clientHeight;
@@ -35,14 +44,15 @@ const scale = () => {
   canvas.attr("width", width).attr("height", height);
 };
 
+/**
+ * Draw the oceans
+ */
 const drawOcean = () => {
   const vars = v();
 
   vars.context.strokeStyle = "darkgrey";
   vars.context.lineWidth = 1.5;
   vars.context.fillStyle = "aliceblue";
-
-  // console.log("VA", vars);
 
   vars.context.beginPath();
   vars.context.arc(
@@ -56,6 +66,9 @@ const drawOcean = () => {
   vars.context.stroke();
 };
 
+/**
+ * Draw the landmass
+ */
 const drawCountries = () => {
   const vars = v();
 
@@ -64,20 +77,12 @@ const drawCountries = () => {
     .scale(vars.radius * zoom)
     .translate([vars.width / 2, vars.height / 2]);
 
-  // console.log(rotation);
-
   projection.rotate(currentLocation);
-  // projection.center(currentLocation);
-
   path = d3.geoPath(projection, vars.context);
-
-  // console.log(path);
 
   vars.context.strokeStyle = "darkgrey";
   vars.context.lineWidth = 0.35;
   vars.context.fillStyle = "mintcream";
-
-  // console.log(countries);
 
   vars.context.beginPath(),
     path(countries),
@@ -85,6 +90,9 @@ const drawCountries = () => {
     vars.context.stroke();
 };
 
+/**
+ * Draw all airports visited
+ */
 const drawAirports = () => {
   const vars = v();
 
@@ -94,81 +102,39 @@ const drawAirports = () => {
 
   path.pointRadius(10);
 
-  // const pt = [-33.968906, 18.596489];
-  // const pt2 = [18.596489, -33.968906];
-
-  // const pt3 = {
-  //   type: "Point",
-  //   coordinates: pt2
-  // };
-
-  // console.log("ASD", projection(pt));
-
   vars.context.beginPath();
 
   flightData.forEach(f => {
-    path({
-      type: "Point",
-      coordinates: [f.start_airport_longitude, f.start_airport_latitude]
-    });
-    path({
-      type: "Point",
-      coordinates: [f.end_airport_longitude, f.end_airport_latitude]
-    });
+    path(f.calculated.start_point);
+    path(f.calculated.end_point);
   });
 
   vars.context.fill();
 };
 
-const getLineSegment = (line, time) => {
-  const speed = 100;
-
-  const point = turf.along(line, time * speed);
-
-  return {
-    type: "LineString",
-    coordinates: [line.coordinates[0], point.geometry.coordinates]
-  };
-};
-
+/**
+ * Draw all completed trips to date (contained in `flightData`)
+ */
 const drawTrips = () => {
   const vars = v();
-
-  const ls = {
-    type: "LineString",
-    coordinates: [[18.596489, -33.968906], [4.763385, 52.309069]]
-  };
 
   vars.context.strokeStyle = "steelblue";
   vars.context.lineWidth = 0.7;
 
   vars.context.beginPath();
-
-  // path(getLineSegment(ls, time));
-
   path(flightPaths);
-
-  // flightData.forEach(f => {
-  //   path({
-  //     type: "LineString",
-  //     coordinates: [
-  //       [f.start_airport_longitude, f.start_airport_latitude],
-  //       [f.end_airport_longitude, f.end_airport_latitude]
-  //     ]
-  //   });
-  // });
-
   vars.context.stroke();
 };
 
+/**
+ * Draw the current timestamp
+ */
 const drawDateTime = () => {
   const vars = v();
 
   const color = d3.color("black");
   color.opacity = 0.25;
   vars.context.fillStyle = color;
-
-  // console.log(vars.width);
 
   vars.context.font = "20px serif";
   vars.context.fillText(
@@ -189,8 +155,6 @@ const drawCurrentPosition = () => {
 
   vars.context.beginPath();
 
-  // console.log(currentLocation);
-
   path({
     type: "Point",
     coordinates: [-currentLocation[0], -currentLocation[1]]
@@ -199,6 +163,9 @@ const drawCurrentPosition = () => {
   vars.context.fill();
 };
 
+/**
+ * Draw the frame
+ */
 const render = () => {
   const vars = v();
   vars.context.clearRect(0, 0, vars.width, vars.height);
@@ -210,27 +177,54 @@ const render = () => {
   drawCurrentPosition();
 };
 
+/**
+ * Reset
+ */
+const reset = () => {
+  flightsCompleted = 0;
+  distanceCompleted = 0;
+  durationCompleted = 0;
+  time = 0;
+  datetime = moment("2018-01-01");
+  flightPaths = turf.featureCollection([]);
+};
+
+const replay = () => {
+  reset();
+  animateFlights = true;
+  document.getElementById("flight-control").innerHTML = animateFlights
+    ? '<i class="fas fa-pause"></i> Pause'
+    : '<i class="fas fa-play"></i> Play';
+
+  initFlightControl();
+};
+
+/**
+ * Control the time
+ */
 const updateTime = () => {
   // Update time more quickly when not flying
   if (currentFlight) {
-    datetime.add(5, "m");
+    datetime.add(8, "m");
   } else {
     time = time + 1;
     datetime.add(2, "h");
   }
 
+  // Reset at the end of the year
   if (datetime.isAfter(moment("2019-01-01"))) {
-    time = 0;
-    datetime = moment("2018-01-01");
-    flightPaths = turf.featureCollection([]);
+    animateFlights = false;
+    document.getElementById("flight-control").onclick = replay;
+    document.getElementById("flight-control").innerHTML =
+      '<i class="fas fa-redo"></i> Replay';
   }
 };
 
 const getInProgressFlight = () => {
-  return flightData.find(f => {
+  return flightData.find((f, i) => {
     return (
-      moment(f.start_time).isBefore(datetime) &&
-      moment(f.end_time).isAfter(datetime)
+      f.calculated.start_datetime.isBefore(datetime) &&
+      f.calculated.end_datetime.isAfter(datetime)
     );
   });
 };
@@ -243,70 +237,36 @@ const getFlightName = flight => {
 
 const getFlightCompletedFraction = flight => {
   // get total flight duration (seconds)
-  const duration = moment.duration(
-    moment(flight.end_time).diff(moment(flight.start_time))
-  );
-
-  // console.log(duration);
+  const duration = flight.calculated.duration;
 
   // get time since flight started (seconds)
   const timeSinceStart = moment.duration(
     moment(datetime).diff(moment(flight.start_time))
   );
 
-  // console.log(timeSinceStart);
-
-  // console.log(timeSinceStart.asSeconds());
-
   return timeSinceStart.asSeconds() / duration.asSeconds();
 };
 
-const getFlightLineString = flight => {
-  const line = turf.helpers.lineString([
-    [
-      parseFloat(flight.start_airport_longitude),
-      parseFloat(flight.start_airport_latitude)
-    ],
-    [
-      parseFloat(flight.end_airport_longitude),
-      parseFloat(flight.end_airport_latitude)
-    ]
-  ]);
-
-  // debugger;
-
-  return line;
-};
-
-const getFlightDistance = flight => {
-  return turf.length(getFlightLineString(flight), { unit: "kilometers" });
+const setCurrentPoint = point => {
+  currentLocation = [
+    -point.geometry.coordinates[0],
+    -point.geometry.coordinates[1],
+    0
+  ];
 };
 
 const getCompletedSegment = flight => {
-  const flightLine = getFlightLineString(flight);
+  const flightLine = flight.calculated.flight_path;
 
   // get endpoint of currently completed
   const completedFraction = getFlightCompletedFraction(flight);
 
-  // // just snap to the end
-  // if (completedFraction > 0.97) {
-  //   return flightLine;
-  // }
-
-  const distance = getFlightDistance(flight);
+  const distance = flight.calculated.distance;
   const endpoint = turf.along(flightLine, distance * completedFraction, {
     unit: "kilometers"
   });
 
-  currentLocation = [
-    // endpoint.geometry.coordinates[1],
-
-    -endpoint.geometry.coordinates[0],
-    -endpoint.geometry.coordinates[1],
-    0
-  ];
-
-  // console.log(currentLocation);
+  setCurrentPoint(endpoint);
 
   // create line from start to point
   return turf.helpers.lineString(
@@ -330,73 +290,131 @@ const insertOrReplaceSegment = segment => {
 };
 
 const updateFlightPaths = () => {
+  const completedFlights = flightData.filter(f =>
+    f.calculated.end_datetime.isBefore(datetime)
+  ).length;
+
   currentFlight = getInProgressFlight();
 
-  if (currentFlight) {
-    // console.log(getFlightCompletedFraction(currentFlight));
+  flightPaths = turf.featureCollection(
+    flightData.slice(0, completedFlights).map(f => f.calculated.flight_path)
+  );
 
+  if (flightPaths.features.length) {
+    setCurrentPoint(
+      flightData[flightPaths.features.length - 1].calculated.end_point
+    );
+  }
+
+  if (currentFlight) {
     const segment = getCompletedSegment(currentFlight);
 
-    insertOrReplaceSegment(segment);
-
-    // console.log(flightPaths);
+    flightPaths.features.push(segment);
   }
 };
 
+/**
+ * Animation loop
+ */
 const tick = () => {
   render();
-  // rotation = (rotation + 0.5) % 360;
 
-  updateTime();
-  updateFlightPaths();
+  if (animateFlights) {
+    updateTime();
+    updateFlightPaths();
+  }
 
   window.requestAnimationFrame(tick);
 };
 
+/**
+ * Scale and draw
+ */
 const plotGlobe = async () => {
-  await loadData();
   scale();
   render();
-
-  // setInterval(() => {
-  //   rotation = (rotation + 10) % 360;
-  // }, 1000);
-
   tick();
+};
 
-  console.log(countries);
+// Preprocess data
+const preProcessFlights = () => {
+  flightData.forEach((f, i) => {
+    const start_point = turf.point([
+      parseFloat(f.start_airport_longitude),
+      parseFloat(f.start_airport_latitude)
+    ]);
+
+    const end_point = turf.point([
+      parseFloat(f.end_airport_longitude),
+      parseFloat(f.end_airport_latitude)
+    ]);
+
+    const flight_path = turf.lineString([
+      start_point.geometry.coordinates,
+      end_point.geometry.coordinates
+    ]);
+
+    const start_datetime = moment(f.start_time);
+    const end_datetime = moment(f.end_time);
+
+    flightData[i].calculated = {
+      index: i,
+      start_datetime,
+      end_datetime,
+      start_point,
+      end_point,
+      flight_path,
+      distance: turf.length(flight_path, {
+        unit: "kilometers"
+      }),
+      duration: moment.duration(end_datetime.diff(start_datetime))
+    };
+  });
 };
 
 const loadData = async () => {
   const countryData = await d3.json("../2018/data/travel/countries-110m.json");
+
   countries = topojson.feature(countryData, countryData.objects.countries);
+  flightData = await d3.json("../2018/data/travel/flights.json");
 };
 
+const toggleAnimation = () => {
+  animateFlights = !animateFlights;
+
+  document.getElementById("flight-control").innerHTML = animateFlights
+    ? '<i class="fas fa-pause"></i> Pause'
+    : '<i class="fas fa-play"></i> Play';
+};
+
+const initFlightControl = () => {
+  document.getElementById("flight-control").onclick = toggleAnimation;
+};
+
+// Entry point
 export const flights = async () => {
-  flightData = await d3.json("../2018/data/travel/flights.json");
+  await loadData();
+  preProcessFlights();
 
   console.log(flightData);
 
-  let distance = 0;
-  const time = moment.duration();
+  let total_distance = 0;
+  let total_duration = moment.duration();
 
   flightData.forEach(f => {
-    distance += parseInt(f.distance.replace(/\D/g, ""));
-
-    const durations = f.duration.replace(/\s/g, "").split(",");
-
-    durations.forEach(d => {
-      const duration = splitAt(d, d.match(/\D/).index);
-
-      time.add(parseInt(duration.value), duration.unit);
-    });
+    total_distance += f.calculated.distance;
+    total_duration.add(f.calculated.duration);
   });
 
   document.querySelector("#totalFlights").innerHTML = flightData.length;
-  document.querySelector("#totalDistance").innerHTML = `${distance}km`;
-  document.querySelector("#totalDuration").innerHTML = time.format(
+  document.querySelector("#totalDistance").innerHTML = `${Math.round(
+    total_distance
+  )}km`;
+  document.querySelector("#totalDuration").innerHTML = total_duration.format(
     "y[y], M[mo], d[d], h[hr], m[m], s[s]"
   );
+
+  initFlightControl();
 
   plotGlobe();
 };

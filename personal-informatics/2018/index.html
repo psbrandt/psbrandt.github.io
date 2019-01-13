@@ -28,6 +28,12 @@
       rel="stylesheet"
       href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="styles.css" />
     <title>Personal Informatics 2018</title>
   </head>
@@ -113,22 +119,27 @@
 
           <div id="flight-map"><canvas id="globe"></canvas></div>
 
-          <div class="metrics-outer">
-            <div class="metrics-wrapper">
-              <div style="width: 50px; display: inline-block;"></div>
-              <div class="metric">
-                <h2 class="metric-title">Total Flights</h2>
-                <span id="totalFlights" class="metric-value"></span>
-              </div>
-              <div style="width: 50px; display: inline-block;"></div>
-              <div class="metric">
-                <h2 class="metric-title">Total Distance</h2>
-                <span id="totalDistance" class="metric-value"></span>
-              </div>
-              <div style="width: 50px; display: inline-block;"></div>
-              <div class="metric">
-                <h2 class="metric-title">Total Duration</h2>
-                <span id="totalDuration" class="metric-value"></span>
+          <div class="flight-footer">
+            <button id="flight-control" class="btn btn-lg">
+              <i class="fas fa-pause"></i> Pause
+            </button>
+            <div class="metrics-outer">
+              <div class="metrics-wrapper">
+                <div style="width: 50px; display: inline-block;"></div>
+                <div class="metric">
+                  <h2 class="metric-title">Total Flights</h2>
+                  <span id="totalFlights" class="metric-value"></span>
+                </div>
+                <div style="width: 50px; display: inline-block;"></div>
+                <div class="metric">
+                  <h2 class="metric-title">Total Distance</h2>
+                  <span id="totalDistance" class="metric-value"></span>
+                </div>
+                <div style="width: 50px; display: inline-block;"></div>
+                <div class="metric">
+                  <h2 class="metric-title">Total Duration</h2>
+                  <span id="totalDuration" class="metric-value"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -148,5 +159,6 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
   <script type="module" src="./index.js"></script>
 </html>
