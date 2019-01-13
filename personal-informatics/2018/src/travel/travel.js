@@ -1,3 +1,12 @@
+/*
+TOTAL FLIGHTS
+41  
+TOTAL DISTANCE
+94082km  
+TOTAL DURATION
+6d, 0hrs, 6m, 0s
+*/
+
 /**
  * Various global variables (FIXME: don't do this)
  */
@@ -220,6 +229,28 @@ const updateTime = () => {
   }
 };
 
+const updateStats = () => {
+  flightsCompleted = flightPaths.features.filter(path => !!path.properties)
+    .length;
+
+  distanceCompleted = flightData
+    .slice(0, flightsCompleted)
+    .map(f => f.calculated.distance)
+    .reduce((a, d) => a + d, 0);
+
+  durationCompleted = flightData
+    .slice(0, flightsCompleted)
+    .map(f => f.calculated.duration)
+    .reduce((a, d) => a.add(d), moment.duration());
+
+  if (currentFlight) {
+    distanceCompleted += getDistanceIntoCurrentFlight();
+    durationCompleted.add(getTimeIntoCurrentFlight());
+  }
+
+  writeStats(flightsCompleted, distanceCompleted, durationCompleted);
+};
+
 const getInProgressFlight = () => {
   return flightData.find((f, i) => {
     return (
@@ -235,14 +266,19 @@ const getFlightName = flight => {
   }`;
 };
 
+const getTimeIntoCurrentFlight = () =>
+  moment.duration(datetime.diff(currentFlight.calculated.start_datetime));
+
 const getFlightCompletedFraction = flight => {
   // get total flight duration (seconds)
   const duration = flight.calculated.duration;
 
   // get time since flight started (seconds)
-  const timeSinceStart = moment.duration(
-    moment(datetime).diff(moment(flight.start_time))
-  );
+  const timeSinceStart = getTimeIntoCurrentFlight();
+
+  // = moment.duration(
+  //   moment(datetime).diff(moment(flight.start_time))
+  // );
 
   return timeSinceStart.asSeconds() / duration.asSeconds();
 };
@@ -255,14 +291,21 @@ const setCurrentPoint = point => {
   ];
 };
 
+const getDistanceIntoCurrentFlight = () => {
+  const completedFraction = getFlightCompletedFraction(currentFlight);
+
+  const distance = currentFlight.calculated.distance;
+
+  return distance * completedFraction;
+};
+
 const getCompletedSegment = flight => {
   const flightLine = flight.calculated.flight_path;
 
-  // get endpoint of currently completed
-  const completedFraction = getFlightCompletedFraction(flight);
+  // get distance completed
+  const completedDistance = getDistanceIntoCurrentFlight();
 
-  const distance = flight.calculated.distance;
-  const endpoint = turf.along(flightLine, distance * completedFraction, {
+  const endpoint = turf.along(flightLine, completedDistance, {
     unit: "kilometers"
   });
 
@@ -322,6 +365,7 @@ const tick = () => {
   if (animateFlights) {
     updateTime();
     updateFlightPaths();
+    updateStats();
   }
 
   window.requestAnimationFrame(tick);
@@ -349,10 +393,10 @@ const preProcessFlights = () => {
       parseFloat(f.end_airport_latitude)
     ]);
 
-    const flight_path = turf.lineString([
-      start_point.geometry.coordinates,
-      end_point.geometry.coordinates
-    ]);
+    const flight_path = turf.lineString(
+      [start_point.geometry.coordinates, end_point.geometry.coordinates],
+      { name: `${f.start_airport_code}-${f.end_airport_code}` }
+    );
 
     const start_datetime = moment(f.start_time);
     const end_datetime = moment(f.end_time);
@@ -391,6 +435,16 @@ const initFlightControl = () => {
   document.getElementById("flight-control").onclick = toggleAnimation;
 };
 
+const writeStats = (flightCount, distance, duration) => {
+  document.querySelector("#totalFlights").innerHTML = flightCount;
+  document.querySelector("#totalDistance").innerHTML = `${Math.round(
+    distance
+  )}km`;
+  document.querySelector("#totalDuration").innerHTML = duration.format(
+    "y[y], M[mo], d[d], h[hr], m[m], s[s]"
+  );
+};
+
 // Entry point
 export const flights = async () => {
   await loadData();
@@ -406,13 +460,7 @@ export const flights = async () => {
     total_duration.add(f.calculated.duration);
   });
 
-  document.querySelector("#totalFlights").innerHTML = flightData.length;
-  document.querySelector("#totalDistance").innerHTML = `${Math.round(
-    total_distance
-  )}km`;
-  document.querySelector("#totalDuration").innerHTML = total_duration.format(
-    "y[y], M[mo], d[d], h[hr], m[m], s[s]"
-  );
+  writeStats(flightData.length, total_distance, total_duration);
 
   initFlightControl();
 
