@@ -441,7 +441,7 @@ const writeStats = (flightCount, distance, duration) => {
     distance
   )}km`;
   document.querySelector("#totalDuration").innerHTML = duration.format(
-    "y[y], M[mo], d[d], h[hr], m[m], s[s]"
+    "d[d], hh[hr], mm[m], ss[s]"
   );
 };
 
