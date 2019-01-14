@@ -230,8 +230,9 @@ const updateTime = () => {
 };
 
 const updateStats = () => {
-  flightsCompleted = flightPaths.features.filter(path => !!path.properties)
-    .length;
+  flightsCompleted = flightPaths.features.filter(path => {
+    return !path.properties.inProgress;
+  }).length;
 
   distanceCompleted = flightData
     .slice(0, flightsCompleted)
@@ -266,8 +267,14 @@ const getFlightName = flight => {
   }`;
 };
 
-const getTimeIntoCurrentFlight = () =>
-  moment.duration(datetime.diff(currentFlight.calculated.start_datetime));
+const getTimeIntoCurrentFlight = () => {
+  // always assume start timezone
+  datetime.utcOffset(currentFlight.calculated.start_datetime.utcOffset());
+
+  return moment.duration(
+    datetime.diff(currentFlight.calculated.start_datetime)
+  );
+};
 
 const getFlightCompletedFraction = flight => {
   // get total flight duration (seconds)
@@ -314,7 +321,7 @@ const getCompletedSegment = flight => {
   // create line from start to point
   return turf.helpers.lineString(
     [flightLine.geometry.coordinates[0], endpoint.geometry.coordinates],
-    { name: getFlightName(flight) }
+    { name: getFlightName(flight), inProgress: true }
   );
 };
 
@@ -333,9 +340,9 @@ const insertOrReplaceSegment = segment => {
 };
 
 const updateFlightPaths = () => {
-  const completedFlights = flightData.filter(f =>
-    f.calculated.end_datetime.isBefore(datetime)
-  ).length;
+  const completedFlights = flightData.filter(f => {
+    return f.calculated.end_datetime.isBefore(datetime);
+  }).length;
 
   currentFlight = getInProgressFlight();
 
@@ -441,7 +448,7 @@ const writeStats = (flightCount, distance, duration) => {
     distance
   )}km`;
   document.querySelector("#totalDuration").innerHTML = duration.format(
-    "d[d], hh[hr], mm[m], ss[s]"
+    "d[d], hh[hr], mm[m]"
   );
 };
 
