@@ -24,7 +24,7 @@ let currentFlight,
   durationCompleted = 0;
 let currentLocation = [-18.596489, 33.968906];
 let zoom = 2.2;
-let animateFlights = true;
+let animateFlights = false;
 
 /**
  * Convenient access to various canvas attributes
@@ -430,12 +430,16 @@ const loadData = async () => {
   flightData = await d3.json("../2018/data/travel/flights.json");
 };
 
-const toggleAnimation = () => {
-  animateFlights = !animateFlights;
-
+const setControlLabel = () => {
   document.getElementById("flight-control").innerHTML = animateFlights
     ? '<i class="fas fa-pause"></i> Pause'
     : '<i class="fas fa-play"></i> Play';
+};
+
+const toggleAnimation = () => {
+  animateFlights = !animateFlights;
+
+  setControlLabel();
 };
 
 const initFlightControl = () => {
@@ -469,7 +473,12 @@ export const flights = async () => {
 
   writeStats(flightData.length, total_distance, total_duration);
 
+  setControlLabel();
   initFlightControl();
 
   plotGlobe();
+
+  // animate when in view
+  inView.threshold(0.8);
+  inView("#flight-map").once("enter", toggleAnimation);
 };
